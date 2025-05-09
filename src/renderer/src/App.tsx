@@ -1,8 +1,8 @@
 import '@renderer/assets/base.css'
 import Setting from '@renderer/components/Setting'
-import Upload from './components/Upload';
-import Action from './components/Action';
-import Preview from './components/Preview';
+import Upload from './components/Upload'
+import Action from './components/Action'
+import Preview from './components/Preview'
 
 const App: React.FC = () => {
   return (

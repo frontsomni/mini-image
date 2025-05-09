@@ -2,29 +2,28 @@ import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { CompressImageParams, CropImageParams, SaveImageParams } from '../types/ImageCompress';
-import { compressImage, cropImage, saveImage, selectDirectory } from './imageProcessor';
-
+import { CompressImageParams, CropImageParams, SaveImageParams } from '../types/ImageCompress'
+import { compressImage, cropImage, saveImage, selectDirectory } from './imageProcessor'
 
 function registerImageHandlers() {
   // 注册 IPC 通道
-  ipcMain.handle('compress-image', (_event, params: CompressImageParams) => compressImage(params));
-  ipcMain.handle('crop-image', (_event, params: CropImageParams) => cropImage(params));
-  ipcMain.handle('save-image', (_event, params: SaveImageParams) => saveImage(params));
+  ipcMain.handle('compress-image', (_event, params: CompressImageParams) => compressImage(params))
+  ipcMain.handle('crop-image', (_event, params: CropImageParams) => cropImage(params))
+  ipcMain.handle('save-image', (_event, params: SaveImageParams) => saveImage(params))
   ipcMain.handle('select-file', async () => {
     const result = await dialog.showOpenDialog({
       title: '选择图片文件',
       properties: ['openFile'],
-      filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'png', 'webp'] }],
-    });
+      filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'png', 'webp'] }]
+    })
 
     if (result.canceled) {
-      return [];
+      return []
     }
 
-    return result.filePaths; // 返回用户选的文件路径
-  });
-  ipcMain.handle('select-directory', selectDirectory);
+    return result.filePaths // 返回用户选的文件路径
+  })
+  ipcMain.handle('select-directory', selectDirectory)
 }
 
 function createWindow(): void {
@@ -50,8 +49,7 @@ function createWindow(): void {
     mainWindow.webContents.openDevTools()
   }
 
-
-  mainWindow.webContents.setWindowOpenHandler((details) => {
+  mainWindow.webContents.setWindowOpenHandler(details => {
     shell.openExternal(details.url)
     return { action: 'deny' }
   })
@@ -84,7 +82,6 @@ app.whenReady().then(() => {
   ipcMain.on('ping', () => console.log('pong'))
 
   createWindow()
-
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the

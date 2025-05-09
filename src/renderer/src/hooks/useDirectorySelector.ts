@@ -1,25 +1,23 @@
-
-import { useState } from 'react';
+import { useState } from 'react'
 
 export interface UseDirectorySelectorResult {
-  outputDir: string;
-  handleSelectOutputDir: () => Promise<void>;
+  outputDir: string
+  handleSelectOutputDir: () => Promise<void>
 }
 
 export const useDirectorySelector = (): UseDirectorySelectorResult => {
-  const [outputDir, setOutputDir] = useState<string>('');
+  const [outputDir, setOutputDir] = useState<string>('')
   const handleSelectOutputDir = async () => {
     try {
-      const dir = await window.electronAPI.selectDirectory();
+      const dir = await window.electronAPI.selectDirectory()
       if (dir) {
-        setOutputDir(dir);
+        setOutputDir(dir)
       }
-    } catch (error) {
-    }
-  };
+    } catch (error) {}
+  }
 
   return {
     outputDir,
-    handleSelectOutputDir,
-  };
-};
+    handleSelectOutputDir
+  }
+}

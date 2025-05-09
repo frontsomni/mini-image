@@ -1,28 +1,27 @@
 export interface CompressImageParams {
-  inputPath: string;
-  outputPath: string;
-  quality?: number; // optional, 0-100
+  inputPath: string
+  outputPath: string
+  quality?: number // optional, 0-100
 }
 
 export interface CropImageParams {
-  inputPath: string;
-  outputPath: string;
-  width: number;
-  height: number;
-  left: number;
-  top: number;
+  inputPath: string
+  outputPath: string
+  width: number
+  height: number
+  left: number
+  top: number
 }
 
 export interface SaveImageParams {
-  sourcePath: string;
-  savePath: string;
+  sourcePath: string
+  savePath: string
 }
 
-
 export interface IpcResponse {
-  success: boolean;
-  outputPath?: string;
-  error?: string;
+  success: boolean
+  outputPath?: string
+  error?: string
 }
 
 export type ImageCompressApi = {

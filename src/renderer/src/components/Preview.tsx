@@ -1,13 +1,10 @@
-
 function Preview() {
   return (
     <div className="w-full mt-8 space-y-4 flex-1 overflow-y-auto">
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((id) => (
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(id => (
         <div key={id} className="flex items-center justify-between bg-white p-4 rounded shadow">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center">
-
-            </div>
+            <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center"></div>
             <div>
               <p className="text-gray-800 font-medium">image{id}.png</p>
               <p className="text-gray-400 text-sm">879 KB</p>

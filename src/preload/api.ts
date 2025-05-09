@@ -1,5 +1,10 @@
-import { ipcRenderer } from "electron"
-import { CompressImageParams, CropImageParams, IpcResponse, SaveImageParams, } from "../types/ImageCompress"
+import { ipcRenderer } from 'electron'
+import {
+  CompressImageParams,
+  CropImageParams,
+  IpcResponse,
+  SaveImageParams
+} from '../types/ImageCompress'
 
 // 图片压缩相关接口
 function compressImage(params: CompressImageParams): Promise<IpcResponse> {
@@ -21,7 +26,6 @@ function selectFile(): Promise<string[]> {
 function selectDirectory(): Promise<string> {
   return ipcRenderer.invoke('select-directory')
 }
-
 
 export default {
   compressImage,
