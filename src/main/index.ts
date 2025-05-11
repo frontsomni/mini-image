@@ -45,7 +45,8 @@ function createWindow(): void {
     registerImageHandlers()
   })
 
-  if (!app.isPackaged) {
+  // Use VSCode Debugger
+  if (is.dev) {
     mainWindow.webContents.openDevTools()
   }
 
