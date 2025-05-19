@@ -1,30 +1,8 @@
-import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
+import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { CompressImageParams, CropImageParams, SaveImageParams } from '../types/ImageCompress'
-import { compressImage, cropImage, saveImage, selectDirectory } from './imageProcessor'
-
-function registerImageHandlers() {
-  // 注册 IPC 通道
-  ipcMain.handle('compress-image', (_event, params: CompressImageParams) => compressImage(params))
-  ipcMain.handle('crop-image', (_event, params: CropImageParams) => cropImage(params))
-  ipcMain.handle('save-image', (_event, params: SaveImageParams) => saveImage(params))
-  ipcMain.handle('select-file', async () => {
-    const result = await dialog.showOpenDialog({
-      title: '选择图片文件',
-      properties: ['openFile'],
-      filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'png', 'webp'] }]
-    })
-
-    if (result.canceled) {
-      return []
-    }
-
-    return result.filePaths // 返回用户选的文件路径
-  })
-  ipcMain.handle('select-directory', selectDirectory)
-}
+import registerImageHandlers from './imageProcessor'
 
 function createWindow(): void {
   // Create the browser window.
@@ -42,12 +20,14 @@ function createWindow(): void {
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
-    registerImageHandlers()
   })
 
   // Use VSCode Debugger
+  registerImageHandlers()
   if (is.dev) {
-    mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools({
+      mode: 'bottom'
+    })
   }
 
   mainWindow.webContents.setWindowOpenHandler(details => {

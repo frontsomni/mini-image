@@ -1,6 +1,6 @@
 export interface CompressImageParams {
-  inputPath: string
-  outputPath: string
+  fileInputPath: string
+  outputPath?: string
   quality?: number // optional, 0-100
 }
 
@@ -18,16 +18,29 @@ export interface SaveImageParams {
   savePath: string
 }
 
-export interface IpcResponse {
-  success: boolean
-  outputPath?: string
-  error?: string
+const enum StatusCode {
+  SUCCESS = 1,
+  ERROR = 2,
+  CANCEL = 3,
+}
+
+export interface IpcResponse<T = object> {
+  code: StatusCode
+  message: string
+  data: T
+}
+
+export interface FileInfo {
+  filebuffer: ArrayBuffer
+  fileInputPath: string
+  fileName: string
+  fileSize: number
 }
 
 export type ImageCompressApi = {
-  compressImage: (params: CompressImageParams) => Promise<IpcResponse>
-  cropImage: (params: CropImageParams) => Promise<IpcResponse>
-  saveImage: (params: SaveImageParams) => Promise<IpcResponse>
-  selectFile: () => Promise<string[]>
-  selectDirectory: () => Promise<string>
+  compressFile: (params: CompressImageParams) => Promise<IpcResponse<FileInfo>>
+  cropFile: (params: CropImageParams) => Promise<IpcResponse>
+  saveFile: (params: SaveImageParams) => Promise<IpcResponse>
+  selectFile: () => Promise<IpcResponse>
+  selectDirectory: () => Promise<IpcResponse>
 }

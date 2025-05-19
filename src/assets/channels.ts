@@ -1,0 +1,10 @@
+const enum Channels {
+  SELECT_FILE = 'SELECT_FILE',
+  SAVE_FILE = 'SAVE_FILE',
+  COMPRESS_FILE = 'COMPRESS_FILE',
+  CROP_FILE = 'CROP_FILE',
+  SELECT_DIRECTORY = 'SELECT_DIRECTORY',
+}
+
+export default Channels
+

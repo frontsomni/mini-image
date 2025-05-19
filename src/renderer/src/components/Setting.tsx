@@ -6,11 +6,13 @@ function Settings() {
   }
 
   return (
-    <button
-      onClick={onSetHandler}
-      className="p-2 rounded hover:bg-gray-100  hover:text-blue-500 transition absolute top-2 right-2">
-      <Cog8ToothIcon className="size-7" />
-    </button>
+    <div className='flex justify-end w-full'>
+      <button
+        onClick={onSetHandler}
+        className="rounded hover:bg-gray-100  hover:text-blue-500 transition cursor-pointer">
+        <Cog8ToothIcon className="size-6" />
+      </button>
+    </div>
   )
 }
 

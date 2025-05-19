@@ -19,16 +19,15 @@ export const useImageCompressor = (options: CompressOptions = {}) => {
         ? `${outputDir}/${fileName}`
         : inputPath.replace(/(\.\w+)$/, '_compressed$1')
 
-      const result = await window.electronAPI.compressImage({
-        inputPath,
-        outputPath,
+      const result = await window.electronAPI.compressFile({
+        fileInputPath: inputPath,
         quality
       })
 
-      if (result.success) {
-        setLog(`✅ 压缩成功: ${result.outputPath}`)
+      if (result.code === 1) {
+        setLog(`✅ 压缩成功: ${result.data}`)
       } else {
-        setLog(`❌ 压缩失败: ${result.error}`)
+        setLog(`❌ 压缩失败: ${result.message}`)
       }
 
       return result
