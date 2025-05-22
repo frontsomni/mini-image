@@ -8,23 +8,58 @@ import {
 } from '../types/ImageCompress'
 import { dialog, ipcMain } from 'electron'
 import Channels from '../assets/channels'
+import path from 'path'
+
+// 获取上传的图片压缩前字节大小
+async function getFileSize(filePath: string): Promise<number> {
+  return new Promise((resolve, reject) => {
+    fs.stat(filePath, (err, stats) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(stats.size)
+      }
+    })
+  }
+  )
+}
+
+// 获取文件信息
+async function getFileInfo(filePath: string): Promise<sharp.Metadata> {
+  return new Promise((resolve, reject) => {
+    sharp(filePath)
+      .metadata()
+      .then((metadata) => {
+        resolve(metadata)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}
 
 // 压缩图片
-export async function compressImage(params: CompressImageParams): Promise<IpcResponse> {
+export async function compressImage(_event: Electron.IpcMainInvokeEvent, params: CompressImageParams): Promise<IpcResponse> {
   try {
     const { fileInputPath, quality = 80 } = params
+    const fileOringSize = await getFileSize(fileInputPath)
+    const fileInfo = await getFileInfo(fileInputPath)
     const fileBuffer = await sharp(fileInputPath)
       .jpeg({ quality, })
       .toBuffer()
-    const fileName = fileInputPath.split('/').pop() ?? ''
 
+    const fileFullName = path.basename(fileInputPath)
+    const fileName = path.parse(fileFullName).name
     return {
       code: 1,
       data: {
-        fileBuffer,
+        fileBase64: fileBuffer.toString('base64'),
         fileInputPath,
         fileName,
+        fileOriginalSize: fileOringSize,
         fileSize: fileBuffer.length,
+        fileSuffix: fileInfo.format,
+        fileFullName,
       },
       message: '压缩成功'
     }
@@ -39,7 +74,7 @@ export async function compressImage(params: CompressImageParams): Promise<IpcRes
 }
 
 // 裁剪图片
-export async function cropImage(params: CropImageParams): Promise<IpcResponse> {
+export async function cropImage(_event: Electron.IpcMainInvokeEvent, params: CropImageParams): Promise<IpcResponse> {
   try {
     await sharp(params.inputPath)
       .extract({
@@ -65,7 +100,7 @@ export async function cropImage(params: CropImageParams): Promise<IpcResponse> {
 }
 
 // 保存图片（复制文件）
-export async function saveImage(params: SaveImageParams): Promise<IpcResponse> {
+export async function saveImage(_event: Electron.IpcMainInvokeEvent, params: SaveImageParams): Promise<IpcResponse> {
   try {
     fs.copyFileSync(params.sourcePath, params.savePath)
     return {
@@ -123,12 +158,17 @@ export async function selectFile(): Promise<IpcResponse> {
   }
 }
 
+const handleList = {
+  [Channels.COMPRESS_FILE]: compressImage,
+  [Channels.CROP_FILE]: cropImage,
+  [Channels.SAVE_FILE]: saveImage,
+  [Channels.SELECT_FILE]: selectFile,
+  [Channels.SELECT_DIRECTORY]: selectDirectory,
+}
+
 export default function registerImageHandlers() {
   // 注册 IPC 通道
-  ipcMain.handle(Channels.COMPRESS_FILE, (_event, params: CompressImageParams) => compressImage(params))
-  ipcMain.handle(Channels.CROP_FILE, (_event, params: CropImageParams) => cropImage(params))
-  ipcMain.handle(Channels.SAVE_FILE, (_event, params: SaveImageParams) => saveImage(params))
-  ipcMain.handle(Channels.SELECT_FILE, (_event) => selectFile())
-
-  ipcMain.handle(Channels.SELECT_DIRECTORY, selectDirectory)
+  Object.entries(handleList).forEach(([channel, handler]) => {
+    ipcMain.handle(channel, handler)
+  })
 }

@@ -31,10 +31,14 @@ export interface IpcResponse<T = object> {
 }
 
 export interface FileInfo {
-  filebuffer: ArrayBuffer
+  filebuffer?: ArrayBuffer
+  fileOriginalSize: number
+  fileBase64: string
   fileInputPath: string
   fileName: string
   fileSize: number
+  fileSuffix: string
+  fileFullName: string
 }
 
 export type ImageCompressApi = {
