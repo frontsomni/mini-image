@@ -26,6 +26,7 @@
     "@electron-toolkit/utils": "^4.0.0",
     "@heroicons/react": "^2.2.0",
     "electron-updater": "^6.3.9",
+    "lucide-react": "^0.511.0",
     "sharp": "^0.34.1",
     "zustand": "^5.0.4"
   },

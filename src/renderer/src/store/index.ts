@@ -21,7 +21,7 @@ const useFileStore = create<FileStore>(set => ({
   downloadFile: (idx: number) => set(state => {
     const fileList = state.fileList.filter((_, index) => index !== idx)
     return { fileList }
-  })
+  }),
 }))
 
 export default useFileStore
