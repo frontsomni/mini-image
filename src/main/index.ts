@@ -2,7 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import registerImageHandlers from './imageProcessor'
+import registerFileHandlers from './fileProcessor'
 
 function createWindow(): void {
   // Create the browser window.
@@ -23,7 +23,7 @@ function createWindow(): void {
   })
 
   // Use VSCode Debugger
-  registerImageHandlers()
+  registerFileHandlers()
   if (is.dev) {
     mainWindow.webContents.openDevTools({
       mode: 'bottom'

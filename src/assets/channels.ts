@@ -4,6 +4,7 @@ const enum Channels {
   COMPRESS_FILE = 'COMPRESS_FILE',
   CROP_FILE = 'CROP_FILE',
   SELECT_DIRECTORY = 'SELECT_DIRECTORY',
+  DOWNLOAD_FILE = 'DOWNLOAD_FILe',
 }
 
 export default Channels

@@ -1,0 +1,32 @@
+import { dialog } from "electron"
+import { IpcResponse } from "../../types/ImageCompress"
+
+export default async function selectFile(): Promise<IpcResponse> {
+  try {
+    const result = await dialog.showOpenDialog({
+      title: '选择图片文件',
+      properties: ['openFile', 'multiSelections',],
+      filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'png', 'webp'] }]
+    })
+
+    if (result.canceled) {
+      return {
+        code: 2,
+        message: '用户取消选择',
+        data: {}
+      }
+    }
+
+    return {
+      code: 1,
+      message: '选择成功',
+      data: result.filePaths
+    }
+  } catch (error) {
+    return {
+      code: 2,
+      message: '选择失败',
+      data: {}
+    }
+  }
+}

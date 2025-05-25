@@ -31,14 +31,13 @@ export interface IpcResponse<T = object> {
 }
 
 export interface FileInfo {
-  filebuffer?: ArrayBuffer
   fileOriginalSize: number
   fileBase64: string
   fileInputPath: string
   fileName: string
   fileSize: number
-  fileSuffix: string
-  fileFullName: string
+  fileFormat: string
+  fileNameWithFormat: string
 }
 
 export type ImageCompressApi = {
@@ -47,4 +46,5 @@ export type ImageCompressApi = {
   saveFile: (params: SaveImageParams) => Promise<IpcResponse>
   selectFile: () => Promise<IpcResponse>
   selectDirectory: () => Promise<IpcResponse>
+  downloadFile: (base64: string, fileName: string) => Promise<IpcResponse>
 }

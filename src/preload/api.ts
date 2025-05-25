@@ -28,10 +28,15 @@ function selectDirectory(): Promise<string> {
   return ipcRenderer.invoke(Channels.SELECT_DIRECTORY)
 }
 
+function downloadFile(base64: string, fileName: string): Promise<IpcResponse> {
+  return ipcRenderer.invoke(Channels.DOWNLOAD_FILE, base64, fileName)
+}
+
 export default {
   compressFile,
   cropImage,
   saveImage,
   selectFile,
-  selectDirectory
+  selectDirectory,
+  downloadFile
 }
