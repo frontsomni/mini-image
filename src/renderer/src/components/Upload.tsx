@@ -1,7 +1,7 @@
 import useFileStore from "@renderer/store"
-import { ArrowUpFromLine, Upload as UpLoadImage } from "lucide-react";
+import { ArrowUpFromLine, } from "lucide-react";
 function Upload() {
-  const { setFileList } = useFileStore();
+  const { setFile } = useFileStore();
   // 选择文件
   async function fileUploadHandler() {
     const { data, code } = await window.api.selectFile()
@@ -13,17 +13,16 @@ function Upload() {
     }
   }
 
-
   // 压缩文件
   async function compressFile(fileInputPath: string) {
     const fileInfo = await window.api.compressFile({
       fileInputPath,
     })
-    setFileList([fileInfo.data])
+    setFile(fileInfo.data)
   }
 
   return (
-    <div className="w-full bg-white border-2 border-dashed border-gray-200 rounded-lg flex flex-col items-center justify-center p-12 cursor-pointer hover:border-blue-400 transition"
+    <div className="w-full mt-5 bg-white border-2 border-dashed border-gray-200 rounded-lg flex flex-col items-center justify-center p-12 cursor-pointer hover:border-blue-400 transition"
       onClick={fileUploadHandler}
     >
       <ArrowUpFromLine size={50} />

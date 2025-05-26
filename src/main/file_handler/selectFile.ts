@@ -1,5 +1,5 @@
 import { dialog } from "electron"
-import { IpcResponse } from "../../types/ImageCompress"
+import { IpcResponse, StatusCode } from "../../types/ImageCompress"
 
 export default async function selectFile(): Promise<IpcResponse> {
   try {
@@ -11,22 +11,22 @@ export default async function selectFile(): Promise<IpcResponse> {
 
     if (result.canceled) {
       return {
-        code: 2,
+        code: StatusCode.CANCEL,
         message: '用户取消选择',
-        data: {}
+        data: {},
       }
     }
 
     return {
-      code: 1,
+      code: StatusCode.SUCCESS,
       message: '选择成功',
       data: result.filePaths
     }
   } catch (error) {
     return {
-      code: 2,
+      code: StatusCode.ERROR,
       message: '选择失败',
-      data: {}
+      data: {},
     }
   }
 }
