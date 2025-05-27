@@ -1,7 +1,7 @@
 import sharp from "sharp"
 import { getFileInfo, getFileSize, supportedImageFormats } from "./fileInfo"
 import path from "path"
-import { CompressImageParams, FileInfo, IpcResponse, StatusCode } from "../../types/ImageCompress"
+import type { CompressImageParams, FileInfo, IpcResponse, } from "../../types/ImageCompress"
 
 export default async function compressImage(_event: Electron.IpcMainInvokeEvent, params: CompressImageParams): Promise<IpcResponse<FileInfo | object>> {
   try {
@@ -26,7 +26,7 @@ export default async function compressImage(_event: Electron.IpcMainInvokeEvent,
     const fileName = path.parse(fileNameWithFormat).name
 
     return {
-      code: StatusCode.SUCCESS,
+      code: 1,
       data: {
         fileBuffer,
         fileInputPath,
@@ -40,7 +40,7 @@ export default async function compressImage(_event: Electron.IpcMainInvokeEvent,
     }
   } catch (error) {
     return {
-      code: StatusCode.ERROR,
+      code: 2,
       message: '压缩失败',
       data: {}
     }

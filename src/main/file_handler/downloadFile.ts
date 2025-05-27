@@ -2,7 +2,7 @@
 import { app } from 'electron';
 import fs from 'fs';
 import path from 'path';
-import { IpcResponse, StatusCode } from '../../types/ImageCompress';
+import { IpcResponse } from '../../types/ImageCompress';
 import { getUniqueFileName } from './fileInfo';
 
 type DownloadFileResonse = {

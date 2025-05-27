@@ -1,11 +1,12 @@
 import useFileStore from "@renderer/store"
 import { ArrowUpFromLine, } from "lucide-react";
+
 function Upload() {
   const { setFile } = useFileStore();
   // 选择文件
   async function fileUploadHandler() {
     const { data, code } = await window.api.selectFile()
-    if (code === 1) {
+    if (code === StatusCode.SUCCESS) {
       const files = data as string[]
       for await (const fileInputPath of files) {
         compressFile(fileInputPath)

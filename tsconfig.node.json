@@ -5,6 +5,7 @@
     "src/main/**/*",
     "src/preload/**/*",
     "src/assets/**/*",
+    "src/types/*.d.ts",
   ],
   "compilerOptions": {
     "composite": true,

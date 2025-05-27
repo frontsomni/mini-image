@@ -12,6 +12,7 @@ export default defineConfig({
     plugins: [externalizeDepsPlugin(), tailwindcss()],
   },
   renderer: {
+    publicDir: resolve(__dirname, 'src/renderer/src/assets'),
     resolve: {
       alias: {
         '@renderer': resolve('src/renderer/src'),

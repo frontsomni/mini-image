@@ -1,3 +1,4 @@
+
 export interface CompressImageParams {
   fileInputPath: string
   outputPath?: string
@@ -16,12 +17,6 @@ export interface CropImageParams {
 export interface SaveImageParams {
   sourcePath: string
   savePath: string
-}
-
-enum StatusCode {
-  SUCCESS = 1,
-  ERROR = 2,
-  CANCEL = 3,
 }
 
 export interface IpcResponse<T = object> {
@@ -46,6 +41,6 @@ export type ImageCompressApi = {
   cropFile: (params: CropImageParams) => Promise<IpcResponse>
   saveFile: (params: SaveImageParams) => Promise<IpcResponse>
   selectFile: () => Promise<IpcResponse>
-  selectDirectory: () => Promise<IpcResponse>
+  // selectDirectory: () => Promise<IpcResponse>
   downloadFile: (fileBuffer: Buffer, fileName: string) => Promise<IpcResponse>
 }

@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-import { IpcResponse, SaveImageParams, StatusCode } from "../../types/ImageCompress"
+import { IpcResponse, SaveImageParams } from "../../types/ImageCompress"
 
 // 保存图片（复制文件）
 export default async function saveImage(_event: Electron.IpcMainInvokeEvent, params: SaveImageParams): Promise<IpcResponse> {

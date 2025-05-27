@@ -1,5 +1,5 @@
 import { dialog } from "electron"
-import { IpcResponse, StatusCode } from "../../types/ImageCompress"
+import { IpcResponse } from "../../types/ImageCompress"
 
 export default async function selectFile(): Promise<IpcResponse> {
   try {

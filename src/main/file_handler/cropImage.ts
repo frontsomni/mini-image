@@ -1,5 +1,5 @@
 import sharp from "sharp"
-import { CropImageParams, IpcResponse, StatusCode } from "../../types/ImageCompress"
+import { CropImageParams, IpcResponse } from "../../types/ImageCompress"
 
 // 裁剪文件
 export default async function cropImage(_event: Electron.IpcMainInvokeEvent, params: CropImageParams): Promise<IpcResponse> {

@@ -12,4 +12,8 @@
 
 ## 设置功能
 1. 小于多少 KB 图片不压缩,用于默认的 base64 处理 --- 好像没什么作用
-2. 
+
+
+
+## 技术文档
+1. [react-toastify](https://fkhadra.github.io/react-toastify/icons)

@@ -37,6 +37,6 @@ export default {
   cropImage,
   saveImage,
   selectFile,
-  selectDirectory,
+  // selectDirectory,
   downloadFile
 }
