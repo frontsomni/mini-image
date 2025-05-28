@@ -2,13 +2,14 @@
 import { app } from 'electron';
 import fs from 'fs';
 import path from 'path';
-import { IpcResponse } from '../../types/ImageCompress';
-import { getUniqueFileName } from './fileInfo';
+import { IpcResponse } from '../../types/imageCompress';
+import { getUniqueFileName } from './utils';
+import { StatusCode } from "../../assets/constant";
 
-type DownloadFileResonse = {
+type DownloadImageResonse = {
   fileName: string;
 }
-export default async function downloadFile(_event: Electron.IpcMainInvokeEvent, fileBuffer: Buffer, fileName: string): Promise<IpcResponse<DownloadFileResonse | object>> {
+export default async function downloadImage(_event: Electron.IpcMainInvokeEvent, fileBuffer: Buffer, fileName: string): Promise<IpcResponse<DownloadImageResonse | object>> {
   try {
     const downloadDir = app.getPath('downloads');
 

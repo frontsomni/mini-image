@@ -4,8 +4,8 @@ import {
   CropImageParams,
   IpcResponse,
   SaveImageParams
-} from '../types/ImageCompress'
-import Channels from '../assets/channels'
+} from '../types/imageCompress'
+import { Channels } from '../assets/constant'
 
 // 图片压缩相关接口
 function compressFile(params: CompressImageParams): Promise<IpcResponse> {
@@ -37,6 +37,6 @@ export default {
   cropImage,
   saveImage,
   selectFile,
-  // selectDirectory,
+  selectDirectory,
   downloadFile
 }

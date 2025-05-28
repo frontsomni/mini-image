@@ -1,15 +1,11 @@
+import { ipcMain } from 'electron'
 import cropImage from "./cropImage";
 import compressImage from "./compressImage";
 import saveImage from "./saveImage";
 // import selectDirectory from "./selectDirectory";
-import selectFile from "./selectFile";
-import downloadFile from "./downloadFile";
-
-
-
-import { ipcMain } from 'electron'
-import Channels from "../../assets/channels";
-
+import selectFile from "./selectImage";
+import downloadFile from "./downloadImage";
+import { Channels } from '../../assets/constant';
 
 const handleList = {
   [Channels.COMPRESS_FILE]: compressImage,

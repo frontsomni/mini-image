@@ -1,7 +1,8 @@
 import sharp from "sharp"
-import { getFileInfo, getFileSize, supportedImageFormats } from "./fileInfo"
+import { getFileInfo, getFileSize, supportedImageFormats } from "./utils"
 import path from "path"
-import type { CompressImageParams, FileInfo, IpcResponse, } from "../../types/ImageCompress"
+import { CompressImageParams, FileInfo, IpcResponse, } from "../../types/imageCompress"
+import { StatusCode } from "../../assets/constant"
 
 export default async function compressImage(_event: Electron.IpcMainInvokeEvent, params: CompressImageParams): Promise<IpcResponse<FileInfo | object>> {
   try {

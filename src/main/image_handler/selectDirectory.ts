@@ -1,4 +1,5 @@
 import { dialog } from "electron"
+import { StatusCode } from "../../assets/constant"
 
 export default async function selectDirectory() {
   const result = await dialog.showOpenDialog({

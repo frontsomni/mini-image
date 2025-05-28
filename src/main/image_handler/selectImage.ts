@@ -1,7 +1,8 @@
 import { dialog } from "electron"
-import { IpcResponse } from "../../types/ImageCompress"
+import { IpcResponse } from "../../types/imageCompress"
+import { StatusCode } from "../../assets/constant"
 
-export default async function selectFile(): Promise<IpcResponse> {
+export default async function selectImage(): Promise<IpcResponse> {
   try {
     const result = await dialog.showOpenDialog({
       title: '选择图片文件',

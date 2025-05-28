@@ -1,5 +1,6 @@
 import useFileStore from "@renderer/store"
 import { ArrowUpFromLine, } from "lucide-react";
+import { StatusCode } from "@/assets/constant";
 
 function Upload() {
   const { setFile } = useFileStore();

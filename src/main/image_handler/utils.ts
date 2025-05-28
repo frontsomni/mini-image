@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import sharp from 'sharp'
+
 // 获取上传的图片压缩前字节大小
 export async function getFileSize(filePath: string): Promise<number> {
   return new Promise((resolve, reject) => {

@@ -1,7 +1,7 @@
 import { useHandlerResponse } from "@renderer/hooks";
 import useFileStore from "@renderer/store"
 import { FileDown } from "lucide-react";
-import { FileInfo } from "src/types/ImageCompress";
+import { FileInfo } from "src/types/imageCompress";
 
 function Preview() {
   const { fileList } = useFileStore()

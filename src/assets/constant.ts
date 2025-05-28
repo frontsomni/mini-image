@@ -1,4 +1,10 @@
-const enum Channels {
+export const enum StatusCode {
+  SUCCESS = 1,
+  ERROR = 2,
+  CANCEL = 3,
+}
+
+export enum Channels {
   SELECT_FILE = 'SELECT_FILE',
   SAVE_FILE = 'SAVE_FILE',
   COMPRESS_FILE = 'COMPRESS_FILE',
@@ -6,6 +12,3 @@ const enum Channels {
   SELECT_DIRECTORY = 'SELECT_DIRECTORY',
   DOWNLOAD_FILE = 'DOWNLOAD_FILe',
 }
-
-export default Channels
-
