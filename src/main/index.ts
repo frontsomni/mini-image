@@ -7,9 +7,9 @@ import registerImageHandlers from './image_handler'
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
     show: false,
+    minWidth: 800,
+    minHeight: 600,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {

@@ -2,13 +2,14 @@ import { useHandlerResponse } from "@renderer/hooks";
 import useFileStore from "@renderer/store"
 import { FileDown } from "lucide-react";
 import { FileInfo } from "src/types/imageCompress";
+import Settings from "@renderer/components/Setting";
 
 function Preview() {
   const { fileList } = useFileStore()
 
   async function downloadFile(file: FileInfo) {
     const { fileBuffer, fileNameWithFormat } = file
-    const r = await window.api.downloadFile(fileBuffer, fileNameWithFormat)
+    const r = await window.api.downloadImage(fileBuffer, fileNameWithFormat)
     useHandlerResponse(r)
   }
 
@@ -37,13 +38,14 @@ function Preview() {
       <div className="flex items-center justify-between bg-white p-4 border-b-[0.5px] border-b-gray-300">
         <p className="font-bold text-orange-600 text-right flex-1">共压缩 {fileList.length} 张图片，节省空间 {calculateSpaceSaved(fileList)} MB</p>
         {/* <button>下载全部</button> */}
+        <Settings />
       </div>
       <div className="overflow-y-auto flex-1 flex-col overflow-x-hidden">
         {
           fileList.map((file, idx) => (
             <div key={idx} className="flex items-center justify-between bg-white p-2 border-b-[0.5px] border-b-gray-300 text-[14px]">
               <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center shadow mr-4">
-                <img src={file.fileBase64} alt={file.fileNameWithFormat} className="w-full h-full object-cover rounded" />
+                <img src={file.fileBase64} alt={file.fileNameWithFormat} className="w-full h-full object-cover" />
               </div>
               <div className="flex-1 mr-4 overflow-hidden">
                 <p className="text-gray-800 font-medium text-ellipsis overflow-hidden text-nowrap" title={file.fileNameWithFormat}>{file.fileNameWithFormat}</p>
@@ -53,7 +55,7 @@ function Preview() {
                 </div>
               </div>
               <div className="flex items-center">
-                <div className="mr-2">
+                <div className="mr-1">
                   <p><b>{fileCostSize(file)}</b></p>
                   <p className="text-[12px] text-gray-500">{bToKb(file.fileSize)}</p>
                 </div>
@@ -61,7 +63,7 @@ function Preview() {
                   <button className="p-[2px] text-blue-500 text-sm rounded hover:text-blue-400 cursor-pointer"
                     onClick={() => downloadFile(file)}
                   >
-                    <FileDown />
+                    <FileDown size={30} />
                   </button>
                 </div>
               </div>

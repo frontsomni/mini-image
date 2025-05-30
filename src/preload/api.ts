@@ -1,42 +1,49 @@
 import { ipcRenderer } from 'electron'
 import {
-  CompressImageParams,
-  CropImageParams,
-  IpcResponse,
-  SaveImageParams
+  ImageCompressApi
 } from '../types/imageCompress'
 import { Channels } from '../assets/constant'
 
 // 图片压缩相关接口
-function compressFile(params: CompressImageParams): Promise<IpcResponse> {
-  return ipcRenderer.invoke(Channels.COMPRESS_FILE, params)
+const compressImage: ImageCompressApi['compressImage'] = (params) => {
+  return ipcRenderer.invoke(Channels.COMPRESS_IMAGE, params)
 }
 
-function cropImage(params: CropImageParams): Promise<IpcResponse> {
-  return ipcRenderer.invoke(Channels.CROP_FILE, params)
+const cropImage: ImageCompressApi['cropImage'] = (params) => {
+  return ipcRenderer.invoke(Channels.CROP_IMAGE, params)
 }
 
-function saveImage(params: SaveImageParams): Promise<IpcResponse> {
-  return ipcRenderer.invoke(Channels.SAVE_FILE, params)
+const saveImage: ImageCompressApi['saveImage'] = (params) => {
+  return ipcRenderer.invoke(Channels.SAVE_IMAGE, params)
 }
 
-function selectFile(): Promise<string[]> {
-  return ipcRenderer.invoke(Channels.SELECT_FILE)
+const selectImage: ImageCompressApi['selectImage'] = () => {
+  return ipcRenderer.invoke(Channels.SELECT_IMAGE)
 }
 
-function selectDirectory(): Promise<string> {
-  return ipcRenderer.invoke(Channels.SELECT_DIRECTORY)
+const downloadImage: ImageCompressApi['downloadImage'] = (base64, fileName) => {
+  return ipcRenderer.invoke(Channels.DOWNLOAD_IMAGE, base64, fileName)
 }
 
-function downloadFile(base64: string, fileName: string): Promise<IpcResponse> {
-  return ipcRenderer.invoke(Channels.DOWNLOAD_FILE, base64, fileName)
+const selectSavePath: ImageCompressApi['selectSavePath'] = () => {
+  return ipcRenderer.invoke(Channels.SELECT_SAVE_PATH)
 }
+const getSavePath: ImageCompressApi['getSavePath'] = () => {
+  return ipcRenderer.invoke(Channels.GET_SAVE_PATH)
+}
+
+const setSavePath: ImageCompressApi['setSavePath'] = (path) => {
+  return ipcRenderer.invoke(Channels.SET_SAVE_PATH, path)
+}
+
 
 export default {
-  compressFile,
+  compressImage,
   cropImage,
   saveImage,
-  selectFile,
-  selectDirectory,
-  downloadFile
+  selectImage,
+  downloadImage,
+  selectSavePath,
+  getSavePath,
+  setSavePath
 }

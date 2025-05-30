@@ -1,14 +1,21 @@
 import { Cog8ToothIcon } from '@heroicons/react/24/outline'
 
 function Settings() {
-  function onSetHandler() {
-    console.log('Settings clicked')
+
+  const handleSelectDirectory = async () => {
+    console.log('Selecting directory...')
+    const r = await window.api.selectSavePath()
+    console.log('Selected directory:', r)
+    if (r) {
+
+      // 处理选中的路径
+    }
   }
 
   return (
-    <div className='flex justify-end w-full'>
+    <div>
       <button
-        onClick={onSetHandler}
+        onClick={handleSelectDirectory}
         className="rounded hover:bg-gray-100  hover:text-blue-500 transition cursor-pointer">
         <Cog8ToothIcon className="size-6" />
       </button>
