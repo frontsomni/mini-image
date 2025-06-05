@@ -1,8 +1,8 @@
 import { dialog } from "electron"
-import { IpcResponse } from "../../types/imageCompress"
+import ImageCompressApi from "../../types/imageCompress"
 import { StatusCode } from "../../assets/constant"
 
-export default async function selectImage(): Promise<IpcResponse> {
+const selectImage: ImageCompressApi['selectImageWithEvent'] = async (_event) => {
   try {
     const result = await dialog.showOpenDialog({
       title: '选择图片文件',
@@ -14,7 +14,6 @@ export default async function selectImage(): Promise<IpcResponse> {
       return {
         code: StatusCode.CANCEL,
         message: '用户取消选择',
-        data: {},
       }
     }
 
@@ -27,7 +26,9 @@ export default async function selectImage(): Promise<IpcResponse> {
     return {
       code: StatusCode.ERROR,
       message: '选择失败',
-      data: {},
     }
   }
 }
+
+
+export default selectImage

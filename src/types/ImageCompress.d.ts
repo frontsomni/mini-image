@@ -1,3 +1,4 @@
+import { IpcMainEvent, IpcMainInvokeEvent } from "electron"
 
 export interface CompressImageParams {
   fileInputPath: string
@@ -38,18 +39,28 @@ export interface FileInfo {
 
 export type ImageReponseType<T> = IpcResponse<IpcResponse['code'] extends StatusCode.SUCCESS ? T : null>
 
-export interface ImageCompressApi {
-  selectSavePath: () => Promise<ImageReponseType<{ path: string }>>
+export interface DownloadImageParams {
+  fileName: string
+}
+
+export interface SelectSavePathParams {
+  path: string
+}
+
+export default interface ImageCompressApi {
+  selectSavePath: () => Promise<ImageReponseType<SelectSavePathParams>>
+  selectSavePathWithEvent: (evt: IpcMainInvokeEvent) => Promise<ImageReponseType<SelectSavePathParams>>
   getSavePath: () => Promise<ImageReponseType<string>>
   setSavePath: (path: string) => Promise<IpcResponse>
-  // compressImage: (params: CompressImageParams) => Promise<ImageReponseType<FileInfo>>
-  // compressImage: (_event: Electron.IpcMainInvokeEvent, params: CompressImageParams) => Promise<ImageReponseType<FileInfo>>
-  compressImage: {
-    (_event: Electron.IpcMainInvokeEvent, params: CompressImageParams): Promise<ImageReponseType<FileInfo>>
-    (_event: Electron.IpcMainInvokeEvent, params: CompressImageParams): Promise<ImageReponseType<FileInfo>>
-  };
+  setSavePathWithEvent: (evt: IpcMainInvokeEvent, path: string) => Promise<IpcResponse>
+  compressImage: (params: CompressImageParams) => Promise<ImageReponseType<FileInfo>>
+  compressImageWithEvent: (evt: IpcMainInvokeEvent, params: CompressImageParams) => Promise<ImageReponseType<FileInfo>>
   cropImage: (params: CropImageParams) => Promise<IpcResponse>
+  cropImageWithEvent: (evt: IpcMainInvokeEvent, params: CropImageParams) => Promise<IpcResponse>
   saveImage: (params: SaveImageParams) => Promise<IpcResponse>
+  saveImageWithEvent: (evt: IpcMainInvokeEvent, params: SaveImageParams) => Promise<IpcResponse>
   selectImage: () => Promise<ImageReponseType<string[]>>
-  downloadImage: (fileBuffer: Buffer, fileName: string) => Promise<IpcResponse>
+  selectImageWithEvent: (evt: IpcMainInvokeEvent) => Promise<ImageReponseType<string[]>>
+  downloadImage: (fileBuffer: Buffer, fileName: string) => Promise<ImageReponseType<DownloadImageParams>>
+  downloadImageWithEvent: (evt: IpcMainInvokeEvent, fileBuffer: Buffer, fileName: string) => Promise<ImageReponseType<DownloadImageParams>>
 }

@@ -1,12 +1,11 @@
 import sharp from "sharp"
 import { getFileInfo, getFileSize, supportedImageFormats } from "./utils"
 import path from "path"
-import { ImageCompressApi, } from "../../types/imageCompress"
+import ImageCompressApi from "../../types/imageCompress"
 import { StatusCode } from "../../assets/constant"
 
 
-
-const compressImage: ImageCompressApi['compressImage'] = async (_event, params) => {
+const compressImage: ImageCompressApi['compressImageWithEvent'] = async (_event, params) => {
   try {
     const { fileInputPath, quality = 80 } = params
     const fileOringSize = await getFileSize(fileInputPath)

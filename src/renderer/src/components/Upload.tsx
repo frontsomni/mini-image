@@ -8,7 +8,7 @@ function Upload() {
   async function fileUploadHandler() {
     const { data, code } = await window.api.selectImage()
     if (code === StatusCode.SUCCESS) {
-      for await (const fileInputPath of data) {
+      for await (const fileInputPath of data!) {
         compressFile(fileInputPath)
       }
     }
@@ -16,10 +16,13 @@ function Upload() {
 
   // 压缩文件
   async function compressFile(fileInputPath: string) {
-    const fileInfo = await window.api.compressImage({
+    const { code, data } = await window.api.compressImage({
       fileInputPath,
     })
-    setFile(fileInfo.data)
+    if (code === StatusCode.SUCCESS) {
+      setFile(data!)
+      return
+    }
   }
 
   return (

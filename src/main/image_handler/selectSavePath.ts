@@ -1,9 +1,9 @@
 import { dialog } from "electron";
-import { ImageCompressApi } from "../../types/imageCompress";
+import ImageCompressApi from "../../types/imageCompress";
 import { StatusCode } from "../../assets/constant";
 
 
-const selectSavePath: ImageCompressApi['selectSavePath'] = async () => {
+const selectSavePath: ImageCompressApi['selectSavePathWithEvent'] = async (_event) => {
   const { canceled, filePaths } = await dialog.showOpenDialog({
     properties: ['openDirectory', 'createDirectory'],
   })

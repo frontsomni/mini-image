@@ -1,9 +1,9 @@
 import fs from 'fs'
-import { IpcResponse, SaveImageParams } from "../../types/imageCompress"
+import ImageCompressApi from "../../types/imageCompress"
 import { StatusCode } from "../../assets/constant"
 
 // 保存图片（复制文件）
-export default async function saveImage(_event: Electron.IpcMainInvokeEvent, params: SaveImageParams): Promise<IpcResponse> {
+const saveImage: ImageCompressApi['saveImageWithEvent'] = async (_event, params) => {
   try {
     fs.copyFileSync(params.sourcePath, params.savePath)
     return {
@@ -15,7 +15,9 @@ export default async function saveImage(_event: Electron.IpcMainInvokeEvent, par
     return {
       code: StatusCode.ERROR,
       message: '保存失败',
-      data: {}
     }
   }
 }
+
+
+export default saveImage

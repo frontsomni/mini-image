@@ -1,9 +1,9 @@
 import sharp from "sharp"
-import { CropImageParams, IpcResponse } from "../../types/imageCompress"
+import ImageCompressApi from "../../types/imageCompress"
 import { StatusCode } from "../../assets/constant"
 
 // 裁剪文件
-export default async function cropImage(_event: Electron.IpcMainInvokeEvent, params: CropImageParams): Promise<IpcResponse> {
+const cropImage: ImageCompressApi['cropImageWithEvent'] = async (_event, params) => {
   try {
     await sharp(params.inputPath)
       .extract({
@@ -23,7 +23,8 @@ export default async function cropImage(_event: Electron.IpcMainInvokeEvent, par
     return {
       code: StatusCode.ERROR,
       message: '裁剪失败',
-      data: {}
     }
   }
 }
+
+export default cropImage
