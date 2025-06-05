@@ -51,6 +51,7 @@ export default interface ImageCompressApi {
   selectSavePath: () => Promise<ImageReponseType<SelectSavePathParams>>
   selectSavePathWithEvent: (evt: IpcMainInvokeEvent) => Promise<ImageReponseType<SelectSavePathParams>>
   getSavePath: () => Promise<ImageReponseType<string>>
+  getSavePathWithEvent: (evt: IpcMainInvokeEvent) => Promise<ImageReponseType<string>>
   setSavePath: (path: string) => Promise<IpcResponse>
   setSavePathWithEvent: (evt: IpcMainInvokeEvent, path: string) => Promise<IpcResponse>
   compressImage: (params: CompressImageParams) => Promise<ImageReponseType<FileInfo>>
