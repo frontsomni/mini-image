@@ -37,7 +37,8 @@ export interface FileInfo {
   fileBase64?: string // optional, base64 encoded string
 }
 
-export type ImageReponseType<T> = IpcResponse<IpcResponse['code'] extends StatusCode.SUCCESS ? T : null>
+// 返回值类型
+export type ImageReponseType<T = IpcResponse> = Promise<T<T['code'] extends StatusCode.SUCCESS ? T : null>>
 
 export interface DownloadImageParams {
   fileName: string
@@ -48,20 +49,20 @@ export interface SelectSavePathParams {
 }
 
 export default interface ImageCompressApi {
-  selectSavePath: () => Promise<ImageReponseType<SelectSavePathParams>>
-  selectSavePathWithEvent: (evt: IpcMainInvokeEvent) => Promise<ImageReponseType<SelectSavePathParams>>
-  getSavePath: () => Promise<ImageReponseType<string>>
-  getSavePathWithEvent: (evt: IpcMainInvokeEvent) => Promise<ImageReponseType<string>>
-  setSavePath: (path: string) => Promise<IpcResponse>
-  setSavePathWithEvent: (evt: IpcMainInvokeEvent, path: string) => Promise<IpcResponse>
-  compressImage: (params: CompressImageParams) => Promise<ImageReponseType<FileInfo>>
-  compressImageWithEvent: (evt: IpcMainInvokeEvent, params: CompressImageParams) => Promise<ImageReponseType<FileInfo>>
-  cropImage: (params: CropImageParams) => Promise<IpcResponse>
-  cropImageWithEvent: (evt: IpcMainInvokeEvent, params: CropImageParams) => Promise<IpcResponse>
-  saveImage: (params: SaveImageParams) => Promise<IpcResponse>
-  saveImageWithEvent: (evt: IpcMainInvokeEvent, params: SaveImageParams) => Promise<IpcResponse>
-  selectImage: () => Promise<ImageReponseType<string[]>>
-  selectImageWithEvent: (evt: IpcMainInvokeEvent) => Promise<ImageReponseType<string[]>>
-  downloadImage: (fileBuffer: Buffer, fileName: string) => Promise<ImageReponseType<DownloadImageParams>>
-  downloadImageWithEvent: (evt: IpcMainInvokeEvent, fileBuffer: Buffer, fileName: string) => Promise<ImageReponseType<DownloadImageParams>>
+  selectSavePath: () => ImageReponseType<SelectSavePathParams>
+  selectSavePathWithEvent: (evt: IpcMainInvokeEvent) => ImageReponseType<SelectSavePathParams>
+  getSavePath: () => ImageReponseType<string>
+  getSavePathWithEvent: (evt: IpcMainInvokeEvent) => ImageReponseType<string>
+  setSavePath: (path: string) => ImageReponseType
+  setSavePathWithEvent: (evt: IpcMainInvokeEvent, path: string) => ImageReponseType
+  compressImage: (params: CompressImageParams) => ImageReponseType<FileInfo>
+  compressImageWithEvent: (evt: IpcMainInvokeEvent, params: CompressImageParams) => ImageReponseType<FileInfo>
+  cropImage: (params: CropImageParams) => ImageReponseType
+  cropImageWithEvent: (evt: IpcMainInvokeEvent, params: CropImageParams) => ImageReponseType
+  saveImage: (params: SaveImageParams) => ImageReponseType
+  saveImageWithEvent: (evt: IpcMainInvokeEvent, params: SaveImageParams) => ImageReponseType
+  selectImage: () => ImageReponseType<string[]>
+  selectImageWithEvent: (evt: IpcMainInvokeEvent) => ImageReponseType<string[]>
+  downloadImage: (fileBuffer: Buffer, fileName: string) => ImageReponseType<DownloadImageParams>
+  downloadImageWithEvent: (evt: IpcMainInvokeEvent, fileBuffer: Buffer, fileName: string) => ImageReponseType<DownloadImageParams>
 }
