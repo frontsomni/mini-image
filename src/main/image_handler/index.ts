@@ -8,6 +8,7 @@ import selectSavePath from './selectSavePath';
 import selectImage from './selectImage';
 import setSavePath from './setSavePath';
 import getSavePath from './getSavePath';
+import removeSavePath from './removeSavePath';
 
 const handleList = {
   [Channels.COMPRESS_IMAGE]: compressImage,
@@ -17,7 +18,8 @@ const handleList = {
   [Channels.DOWNLOAD_IMAGE]: downloadImage,
   [Channels.SELECT_SAVE_PATH]: selectSavePath,
   [Channels.SET_SAVE_PATH]: setSavePath,
-  [Channels.GET_SAVE_PATH]: getSavePath
+  [Channels.GET_SAVE_PATH]: getSavePath,
+  [Channels.REMOVE_SAVE_PATH]: removeSavePath
 }
 
 export default function registerImageHandlers() {

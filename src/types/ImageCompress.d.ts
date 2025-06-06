@@ -51,6 +51,8 @@ export interface SelectSavePathParams {
 export default interface ImageCompressApi {
   selectSavePath: () => ImageReponseType<SelectSavePathParams>
   selectSavePathWithEvent: (evt: IpcMainInvokeEvent) => ImageReponseType<SelectSavePathParams>
+  removeSavePath: () => ImageReponseType
+  removeSavePathWithEvent: (evt: IpcMainInvokeEvent) => ImageReponseType
   getSavePath: () => ImageReponseType<string>
   getSavePathWithEvent: (evt: IpcMainInvokeEvent) => ImageReponseType<string>
   setSavePath: (path: string) => ImageReponseType

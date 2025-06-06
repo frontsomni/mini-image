@@ -17,6 +17,11 @@ function Settings() {
     console.log('获取保存路径:', code, data, message)
   }
 
+  async function handleRemoveSavePath() {
+    const { code, message } = await window.api.removeSavePath()
+    console.log('清空保存路径:', code, message)
+  }
+
   return (
     <div>
       <button
@@ -28,6 +33,8 @@ function Settings() {
         onClick={handleGetSavePath}
       >
         获取保存路径      </button>
+
+      <button onClick={handleRemoveSavePath}>清空路径</button>
     </div>
   )
 }

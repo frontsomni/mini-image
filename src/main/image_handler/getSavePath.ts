@@ -3,11 +3,20 @@ import ImageCompressApi from "../../types/imageCompress"
 import store from "../store"
 
 const getSavePath: ImageCompressApi['getSavePathWithEvent'] = async (_event) => {
-  return {
-    code: StatusCode.SUCCESS, // Assuming 0 is the success code
-    message: '获取保存路径成功',
-    data: store.get('savePath') || '', // Return the save path from the store, or an empty string if not set
+  const path = store.get('savePath')
+  if (path) {
+    return {
+      code: StatusCode.SUCCESS, // Assuming 0 is the success code
+      message: '获取保存路径成功',
+      data: path, // Return the save path from the store, or an empty string if not set
+    }
+  } else {
+    return {
+      code: StatusCode.ERROR, // Assuming 1 is the error code
+      message: '保存路径未设置',
+    }
   }
+
 }
 
 export default getSavePath
