@@ -9,9 +9,10 @@ import getSavePath from './getSavePath';
 import setSavePath from './setSavePath';
 
 const downloadImage: ImageCompressApi['downloadImageWithEvent'] = async (event, fileBuffer, fileName) => {
+  let savePath = ''
   try {
     const { data } = await getSavePath(event)
-    let savePath = data ?? '';
+    savePath = data ?? '';
     // 未设置保存路径时，提示用户选择保存路径
     if (!savePath) {
       const r = await selectSavePath(event);
@@ -37,7 +38,16 @@ const downloadImage: ImageCompressApi['downloadImageWithEvent'] = async (event, 
       }
     };
   } catch (err) {
-    return { message: '下载失败', code: StatusCode.ERROR };
+    let message = '下载失败';
+    if (err instanceof Error) {
+      const error = err as NodeJS.ErrnoException;
+      if (error.code === 'ENOENT') {
+        message = `${savePath} 目录不存在`;
+      } else if (error.code === 'EACCES') {
+        message = `${savePath} 目录没有写入权限`;
+      }
+    }
+    return { message, code: StatusCode.ERROR };
   }
 }
 

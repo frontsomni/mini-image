@@ -24,11 +24,11 @@ function createWindow(): void {
 
   // Use VSCode Debugger
   registerImageHandlers()
-  if (is.dev) {
-    mainWindow.webContents.openDevTools({
-      mode: 'bottom'
-    })
-  }
+  // if (is.dev) {
+  //   mainWindow.webContents.openDevTools({
+  //     mode: 'bottom'
+  //   })
+  // }
 
   mainWindow.webContents.setWindowOpenHandler(details => {
     shell.openExternal(details.url)
