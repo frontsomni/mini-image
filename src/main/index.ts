@@ -1,16 +1,62 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, Menu, globalShortcut } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import registerImageHandlers from './image_handler'
+import { Channels } from '../assets/constant'
+
+
+function createMenu(win: BrowserWindow): void {
+  const menu = Menu.buildFromTemplate([
+    {
+      label: 'File',
+      submenu: [
+        {
+          label: '关于图片压缩',
+          click: () => {
+            app.showAboutPanel(); // 显示内置“关于”面板
+          },
+        },
+        { type: 'separator' }, // ← 分隔线
+        {
+          label: '设置',
+          accelerator: 'CmdOrCtrl+,',
+          click() {
+            win.webContents.send(Channels.SETTINGS, 1);
+          },
+        },
+      ],
+    },
+  ]);
+  Menu.setApplicationMenu(menu);
+}
+
+function openDevTools(window: BrowserWindow): void {
+  if (is.dev) {
+    window.webContents.openDevTools({
+      mode: 'bottom'
+    })
+  }
+}
+
+
+function registerShortcut(win: BrowserWindow) {
+  globalShortcut.register('Escape', () => {
+    win.webContents.send(Channels.SETTINGS, 0)
+  })
+}
+
+function unregisterShortcut() {
+  globalShortcut.unregister('Escape')
+}
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    title: '图片压缩',
     show: false,
     minWidth: 800,
     minHeight: 600,
-    autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
@@ -22,13 +68,14 @@ function createWindow(): void {
     mainWindow.show()
   })
 
+  createMenu(mainWindow)
+
+  registerShortcut(mainWindow)
+
   // Use VSCode Debugger
   registerImageHandlers()
-  // if (is.dev) {
-  //   mainWindow.webContents.openDevTools({
-  //     mode: 'bottom'
-  //   })
-  // }
+
+  openDevTools(mainWindow)
 
   mainWindow.webContents.setWindowOpenHandler(details => {
     shell.openExternal(details.url)
@@ -78,6 +125,7 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
+  unregisterShortcut()
 })
 
 // In this file you can include the rest of your app's specific main process

@@ -38,6 +38,10 @@ const removeSavePath: ImageCompressApi['removeSavePath'] = () => {
   return ipcRenderer.invoke(Channels.REMOVE_SAVE_PATH)
 }
 
+const onMainMessage = (channel, callback) => {
+  ipcRenderer.on(channel, (_event, message) => callback(message))
+}
+
 
 export default {
   compressImage,
@@ -48,5 +52,6 @@ export default {
   selectSavePath,
   getSavePath,
   setSavePath,
-  removeSavePath
+  removeSavePath,
+  onMainMessage
 }

@@ -67,4 +67,5 @@ export default interface ImageCompressApi {
   selectImageWithEvent: (evt: IpcMainInvokeEvent) => ImageReponseType<string[]>
   downloadImage: (fileBuffer: Buffer, fileName: string) => ImageReponseType<DownloadImageParams>
   downloadImageWithEvent: (evt: IpcMainInvokeEvent, fileBuffer: Buffer, fileName: string) => ImageReponseType<DownloadImageParams>
+  onMainMessage: (channel: string, callback: (message: any) => void) => void
 }

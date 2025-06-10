@@ -26,7 +26,7 @@ function Upload() {
   }
 
   return (
-    <div className="w-full mt-5 bg-white border-2 border-dashed border-gray-200 rounded-lg flex flex-col items-center justify-center p-12 cursor-pointer hover:border-blue-400 transition"
+    <div className="w-full  bg-white border-2 border-dashed border-gray-200 rounded-lg flex flex-col items-center justify-center p-12 cursor-pointer hover:border-blue-400 transition"
       onClick={fileUploadHandler}
     >
       <ArrowUpFromLine size={50} />
