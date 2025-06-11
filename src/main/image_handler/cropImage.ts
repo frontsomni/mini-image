@@ -1,5 +1,5 @@
 import sharp from "sharp"
-import ImageCompressApi from "../../types/imageCompress"
+import type ImageCompressApi from "../../types/image-compress"
 import { StatusCode } from "../../assets/constant"
 
 // 裁剪文件

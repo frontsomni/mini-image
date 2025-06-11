@@ -1,5 +1,5 @@
 import { StatusCode } from "../../assets/constant"
-import ImageCompressApi from "../../types/imageCompress"
+import type ImageCompressApi from "../../types/image-compress"
 import store from "../store"
 
 const getSavePath: ImageCompressApi['getSavePathWithEvent'] = async (_event) => {

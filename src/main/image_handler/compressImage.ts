@@ -1,7 +1,7 @@
 import sharp from "sharp"
 import { getFileInfo, getFileSize, supportedImageFormats } from "./utils"
 import path from "path"
-import ImageCompressApi from "../../types/imageCompress"
+import type ImageCompressApi from "../../types/image-compress"
 import { StatusCode } from "../../assets/constant"
 
 

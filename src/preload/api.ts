@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron'
-import ImageCompressApi from '../types/imageCompress'
+import type ImageCompressApi from '../types/image-compress'
 import { Channels } from '../assets/constant'
 
 // 图片压缩相关接口

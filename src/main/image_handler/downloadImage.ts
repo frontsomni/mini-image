@@ -1,7 +1,7 @@
 // 下载图片
 import fs from 'fs';
 import path from 'path';
-import ImageCompressApi from '../../types/imageCompress';
+import type ImageCompressApi from "../../types/image-compress"
 import { getUniqueFileName } from './utils';
 import { StatusCode } from "../../assets/constant";
 import selectSavePath from './selectSavePath';

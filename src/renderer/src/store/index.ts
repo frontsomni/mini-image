@@ -1,4 +1,4 @@
-import { FileInfo } from "src/types/imageCompress";
+import { FileInfo } from "@/types/image-compress";
 import { create } from "zustand";
 
 type FileStore = {

@@ -1,5 +1,5 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
-import ImageCompressApi from './imageCompress'
+import type ImageCompressApi from './image-compress'
 
 // 全局扩展声明
 declare global {

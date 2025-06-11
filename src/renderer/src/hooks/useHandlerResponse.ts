@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { IpcResponse } from "src/types/imageCompress";
+import { type IpcResponse } from "@/types/image-compress";
 
 
 function useHandlerResponse(response: IpcResponse) {

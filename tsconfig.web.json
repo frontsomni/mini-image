@@ -9,6 +9,7 @@
     "src/assets/**/*",
   ],
   "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
     "composite": true,
     "jsx": "react-jsx",
     "baseUrl": ".",

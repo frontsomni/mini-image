@@ -1,5 +1,5 @@
 import { dialog } from "electron"
-import ImageCompressApi from "../../types/imageCompress"
+import type ImageCompressApi from "../../types/image-compress"
 import { StatusCode } from "../../assets/constant"
 
 const selectImage: ImageCompressApi['selectImageWithEvent'] = async (_event) => {

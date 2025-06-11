@@ -1,5 +1,5 @@
 import fs from 'fs'
-import ImageCompressApi from "../../types/imageCompress"
+import type ImageCompressApi from "../../types/image-compress"
 import { StatusCode } from "../../assets/constant"
 
 // 保存图片（复制文件）
