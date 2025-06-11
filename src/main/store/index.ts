@@ -17,4 +17,4 @@ const config = {
 
 const store = new Store<StoreSchema>(config);
 
-export default store as any;
+export default store
