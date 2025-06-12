@@ -8,18 +8,18 @@ const isDev = process.env.NODE_ENV === 'development'
 const mainBuildPlugins = {
   plugins: [externalizeDepsPlugin()],
 }
-const mainBuildConfig = isDev ? mainBuildPlugins : Object.assign({}, mainBuildPlugins, {
-  build: {
-    rollupOptions: {
-      external: [
-        'electron-store',
-      ]
-    }
-  }
-})
+// const mainBuildConfig = isDev ? mainBuildPlugins : Object.assign({}, mainBuildPlugins, {
+//   build: {
+//     rollupOptions: {
+//       external: [
+//         'electron-store',
+//       ]
+//     }
+//   }
+// })
 
 export default defineConfig({
-  main: mainBuildConfig,
+  main: mainBuildPlugins,
   preload: {
     plugins: [externalizeDepsPlugin(), tailwindcss()],
   },
