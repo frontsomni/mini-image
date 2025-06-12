@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // @ts-ignore
 import tailwindcss from '@tailwindcss/vite'
 
-const isDev = process.env.NODE_ENV === 'development'
+// const isDev = process.env.NODE_ENV === 'development'
 const mainBuildPlugins = {
   plugins: [externalizeDepsPlugin()],
 }
