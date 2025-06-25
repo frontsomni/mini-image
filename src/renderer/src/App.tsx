@@ -4,6 +4,7 @@ import Preview from '@renderer/components/Preview'
 import { ToastContainer, Zoom } from 'react-toastify';
 import Record from './components/Record';
 import Settings from './components/Setting';
+import Action from './components/Action';
 
 const App: React.FC = () => {
   console.warn('[App.tsx >>>>]')
@@ -11,7 +12,9 @@ const App: React.FC = () => {
     <>
       <div className="h-full bg-white flex flex-col items-center px-4 pt-4 relative justify-center overflow-hidden">
         <Upload />
-        <Record />
+        <Record>
+          <Action />
+        </Record>
         <Preview />
       </div>
       <Settings />

@@ -38,6 +38,7 @@ const removeSavePath: ImageCompressApi['removeSavePath'] = () => {
   return ipcRenderer.invoke(Channels.REMOVE_SAVE_PATH)
 }
 
+// Renderer 注册监听器,注册一个就行,根据类型处理不同逻辑
 const onMainMessage = (channel, callback) => {
   ipcRenderer.on(channel, (_event, message) => callback(message))
 }

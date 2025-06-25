@@ -1,14 +1,11 @@
 function Action() {
   return (
-    <div className="w-full flex justify-between mt-8">
-      <button className="flex-1 mx-1 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
-        全部压缩
+    <div className="">
+      <button className="px-4 py-2 bg-sky-500 text-white rounded-md cursor-pointer hover:bg-sky-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
+        全部清空
       </button>
-      <button className="flex-1 mx-1 px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600">
-        全部下载
-      </button>
-      <button className="flex-1 mx-1 px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500">
-        清空列表
+      <button className="px-4 py-2 mx-4 bg-orange-400 text-white rounded-md cursor-pointer hover:bg-sky-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
+        下载全部
       </button>
     </div>
   )

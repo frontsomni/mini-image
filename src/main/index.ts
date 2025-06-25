@@ -1,6 +1,7 @@
 import { app, shell, BrowserWindow, ipcMain, Menu, globalShortcut } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import { installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer'
 import icon from '../../resources/icon.png?asset'
 import registerImageHandlers from './image_handler'
 import { Channels } from '../assets/constant'
@@ -33,9 +34,15 @@ function createMenu(win: BrowserWindow): void {
 
 function openDevTools(window: BrowserWindow): void {
   if (is.dev) {
-    window.webContents.openDevTools({
-      mode: 'bottom'
-    })
+
+    installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS])
+      .then(() => {
+        window.webContents.openDevTools({
+          mode: 'bottom',
+        })
+      })
+      .catch((err) => console.log('[扩展失败]', err))
+
   }
 }
 
@@ -55,8 +62,9 @@ function createWindow(): void {
   const mainWindow = new BrowserWindow({
     title: '图片压缩',
     show: false,
-    minWidth: 800,
-    minHeight: 600,
+    // minWidth: 800,
+    // minHeight: 600,
+    fullscreen: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
