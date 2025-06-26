@@ -8,21 +8,22 @@ function Upload() {
   async function fileUploadHandler() {
     const { data, code } = await window.api.selectImage()
     if (code === StatusCode.SUCCESS) {
-      for await (const fileInputPath of data!) {
-        compressImage(fileInputPath)
-      }
+      const r = await Promise.allSettled(data.map((fileInputPath: string) => compressImage(fileInputPath)))
+      const rejectedList = r.filter(v => v.status === 'rejected').map(v => v.value.data.fileName)
+      console.log('[处理失败的文件名]', rejectedList)
     }
   }
 
   // 压缩文件
   async function compressImage(fileInputPath: string) {
-    const { code, data } = await window.api.compressImage({
+    const r = await window.api.compressImage({
       fileInputPath,
     })
+    const { code, data } = r
     if (code === StatusCode.SUCCESS) {
       setFile(data!)
-      return
     }
+    return r
   }
 
   return (

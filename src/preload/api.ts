@@ -23,6 +23,10 @@ const downloadImage: ImageCompressApi['downloadImage'] = (base64, fileName) => {
   return ipcRenderer.invoke(Channels.DOWNLOAD_IMAGE, base64, fileName)
 }
 
+const downloadImagesAsZip: ImageCompressApi['downloadImagesAsZip'] = (files) => {
+  return ipcRenderer.invoke(Channels.DOWNLOAD_IMAGES_AS_ZIP, files)
+}
+
 const selectSavePath: ImageCompressApi['selectSavePath'] = () => {
   return ipcRenderer.invoke(Channels.SELECT_SAVE_PATH)
 }
@@ -54,5 +58,6 @@ export default {
   getSavePath,
   setSavePath,
   removeSavePath,
-  onMainMessage
+  onMainMessage,
+  downloadImagesAsZip
 }

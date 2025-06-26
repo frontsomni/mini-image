@@ -48,6 +48,8 @@ export interface SelectSavePathParams {
   path: string
 }
 
+export type downloadImagesAsZipParams = Pick<FileInfo, 'fileBuffer' | 'fileNameWithFormat'>[]
+
 export default interface ImageCompressApi {
   selectSavePath: () => ImageReponseType<SelectSavePathParams>
   selectSavePathWithEvent: (evt: IpcMainInvokeEvent) => ImageReponseType<SelectSavePathParams>
@@ -67,5 +69,7 @@ export default interface ImageCompressApi {
   selectImageWithEvent: (evt: IpcMainInvokeEvent) => ImageReponseType<string[]>
   downloadImage: (fileBuffer: Buffer, fileName: string) => ImageReponseType<DownloadImageParams>
   downloadImageWithEvent: (evt: IpcMainInvokeEvent, fileBuffer: Buffer, fileName: string) => ImageReponseType<DownloadImageParams>
+  downloadImagesAsZip: (files: downloadImagesAsZipParams) => ImageReponseType<DownloadImageParams>
+  downloadImagesAsZipWithEvent: (evt: IpcMainInvokeEvent, files: downloadImagesAsZipParams) => ImageReponseType<DownloadImageParams>
   onMainMessage: (channel: string, callback: (message: any) => void) => void
 }

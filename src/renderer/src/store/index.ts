@@ -6,6 +6,7 @@ type FileStore = {
   deleteFile: (idx: number) => void;
   downloadFile: (idx: number) => void;
   setFile: (fileList: FileInfo) => Promise<void>;
+  clearFiles: () => void;
 }
 
 // 异步的如何处理
@@ -41,6 +42,9 @@ const useFileStore = create<FileStore>(set => ({
     const fileList = state.fileList.filter((_, index) => index !== idx)
     return { fileList }
   }),
+  clearFiles: () => set(() => ({
+    fileList: []
+  })),
 }))
 
 export default useFileStore
